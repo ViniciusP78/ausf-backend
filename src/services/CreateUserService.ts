@@ -9,10 +9,11 @@ interface Request {
   name: string;
   login: string;
   password: string;
+  cargo_id: number;
 }
 
 class CreateUserService {
-  public async execute({name, login, password}: Request): Promise<User> {
+  public async execute({name, login, password, cargo_id}: Request): Promise<User> {
     const usersRepository = getRepository(User);
 
     const checkUserExists = await usersRepository.findOne({
@@ -28,7 +29,8 @@ class CreateUserService {
     const user = usersRepository.create({
       name,
       login,
-      password: hashedPassword
+      password: hashedPassword,
+      cargo_id
     })
 
     await usersRepository.save(user);

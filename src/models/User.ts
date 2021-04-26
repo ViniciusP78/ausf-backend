@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import Cargo from './Cargo';
 
 @Entity('users')
 class User {
@@ -14,6 +15,23 @@ class User {
 
   @Column()
   password: string;
+
+  @Column()
+  cargo_id: number;
+
+  @ManyToOne(() => Cargo)
+  @JoinColumn({name: 'cargo_id'})
+  cargo: Cargo;
+
+  @Column('boolean', {default: true})
+  status: boolean;
+
+  @CreateDateColumn()
+  created_at: Date;
+
+  @UpdateDateColumn()
+  updated_at: Date;
+  
 }
 
 export default User;
