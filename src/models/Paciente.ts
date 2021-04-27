@@ -15,61 +15,61 @@ class Paciente {
   @Column('char')
   sexo: string;
 
-  @Column()
+  @Column({nullable: true})
   cidade_nascimento: string;
 
-  @Column()
+  @Column({nullable: true})
   nome_mae: string;
 
-  @Column()
+  @Column({nullable: true})
   nome_pai: string;
 
-  @Column()
+  @Column({nullable: true})
   logradouro: string;
 
-  @Column()
+  @Column({nullable: true})
   telefone: string;
 
-  @Column('float')
+  @Column({nullable: true, type: 'float'})
   peso: number;
 
-  @Column('float')
+  @Column({nullable: true, type: 'float'})
   altura: number;
 
-  @Column()
+  @Column({nullable: true})
   RG: string;
 
-  @Column()
+  @Column({nullable: true})
   CPF: string;
 
-  @Column()
+  @Column({nullable: true})
   cartao_sus: string;
 
-  @Column()
+  @Column({nullable: true})
   escolaridade: string;
 
-  @Column()
+  @Column({nullable: true})
   etnia: string;
 
-  @Column()
+  @Column({nullable: true})
   sexualidade: string;
 
-  @Column()
+  @Column({nullable: true})
   sus_dependente: boolean;
 
-  @Column()
+  @Column({nullable: true})
   gestante: boolean;
 
-  @Column()
+  @Column({nullable: true})
   deficiente_fisico: boolean;
 
-  @Column()
+  @Column({nullable: true})
   fumante: boolean;
 
-  @Column()
+  @Column({nullable: true})
   usa_alcool: boolean;
   
-  @Column()
+  @Column({nullable: true})
   usa_drogas: boolean;
 
 }
