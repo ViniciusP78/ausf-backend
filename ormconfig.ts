@@ -13,13 +13,13 @@ module.exports = {
     }
   },
   "entities": [
-    "./src/models/*.ts"
+    "dist/src/models/*.{ts,js}"
   ],
   "migrations": [
-    "./src/database/migrations/*.ts"
+    "dist/src/database/migrations/*.{ts,js}"
   ],
   "cli": {
-    "migrationsDir": "./src/database/migrations"
+    "migrationsDir": "dist/src/database/migrations"
   },
   "synchronize": "true"
 }
