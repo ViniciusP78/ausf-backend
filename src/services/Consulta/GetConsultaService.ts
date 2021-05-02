@@ -1,5 +1,7 @@
 import { getRepository } from 'typeorm';
 
+import AppError from '../../errors/AppError';
+
 import Consulta from '../../models/Consulta';
 
 class GetConsultaService{
@@ -7,6 +9,9 @@ class GetConsultaService{
     const consultasRepository = getRepository(Consulta);
 
     const consulta = await consultasRepository.findOne(id, {relations: ["prontuario", "medico"]});
+
+    if(!consulta)
+      throw new AppError('Consulta inexistente', 404);
 
     delete consulta.medico.password;
 
