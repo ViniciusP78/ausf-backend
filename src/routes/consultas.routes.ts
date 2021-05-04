@@ -17,9 +17,12 @@ consultasRouter.post('/', async (request, response) => {
 })
 
 consultasRouter.get('/', async (request, response) => {
+  const search = request.query.search as string;
+  const data = request.query.data as string;
+
   const listConsulta = new ListConsultaService();
 
-  const consultas = await listConsulta.execute();
+  const consultas = await listConsulta.execute(search, data);
 
   return response.json(consultas);
 })

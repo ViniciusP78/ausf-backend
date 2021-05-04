@@ -1,37 +1,59 @@
-import 'reflect-metadata';
+import "reflect-metadata";
 
-import express, { Request, Response, NextFunction} from 'express';
-import cors from 'cors';
-import 'express-async-errors';
+import express, { Request, Response, NextFunction } from "express";
+import cors from "cors";
+import http from "http";
+import { Server as WebsocketServer } from "socket.io";
+import "express-async-errors";
 
-import routes from './routes';
-import AppError from './errors/AppError';
+import routes from "./routes";
+import AppError from "./errors/AppError";
 
+import "./database";
 
-import './database';
+const sockets: any = {};
 
 const app = express();
+
+const server = http.createServer(app);
+const io = new WebsocketServer(server, {
+  cors: {
+    origin: "*",
+  },
+});
 
 app.use(cors());
 app.use(express.json());
 app.use(routes);
 
-app.use((err: Error, request: Request, response: Response, next: NextFunction) => {
-  if (err instanceof AppError) {
-    return response.status(err.statusCode).json({
-      status: 'error',
-      message: err.message,
+app.use(
+  (err: Error, request: Request, response: Response, next: NextFunction) => {
+    if (err instanceof AppError) {
+      return response.status(err.statusCode).json({
+        status: "error",
+        message: err.message,
+      });
+    }
+
+    console.error(err);
+
+    return response.status(500).json({
+      status: "error",
+      message: "Internal server error",
     });
   }
+);
 
-  console.error(err);
+server.listen(process.env.PORT || 3333, () => {
+  console.log("server started on port 3333");
+});
 
-  return response.status(500).json({
-    status: 'error',
-    message: 'Internal server error',
-  })
-})
+io.on("connection", (socket) => {
+  socket.on("init", (userId) => {
+    sockets[userId] = socket.id;
+  });
 
-app.listen(process.env.PORT || 3333, () => {
-  console.log('server started on port 3333');
-})
+  socket.on("enviarProntuario", ({ medico, prontuario }) => {
+    io.to(sockets[medico]).emit(prontuario);
+  });
+});

@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import CreateUserService from '../services/CreateUserService';
+import ListUserService from '../services/ListUserService';
 
 const usersRouter = Router();
 
@@ -18,6 +19,18 @@ usersRouter.post('/', async (request, response) => {
   delete user.password //portante
 
   return response.json(user);
+})
+
+usersRouter.get('/', async (request, response) => {
+  const search = request.query.search as string;
+  const cargo = request.query.cargo as string;
+
+  const listUser = new ListUserService();
+
+  const users = await listUser.execute(search, Number(cargo))
+  console.log(users);
+
+  return response.json(users);
 })
 
 export default usersRouter;
