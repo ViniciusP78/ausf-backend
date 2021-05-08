@@ -7,6 +7,7 @@ class ListUserService {
     const usersRepository = getRepository(User);
 
     let users = await usersRepository.createQueryBuilder("user")
+      .innerJoinAndSelect("user.cargo", "cargo")
       .where(cargo ? "cargo_id = :cargo": "1=1", {cargo})
       .andWhere("name iLIKE :search",{search: search ? `%${search}%` : '%%'})
       .getMany();
