@@ -19,9 +19,8 @@ prontuariosRouter.post('/', async (request, response) => {
 
 prontuariosRouter.get('/', async (request, response) => {
   const search = request.query.search as string;
-  const pag = Number(request.query.pag as string);
+  const pag = request.query.pag != null ? Number(request.query.pag) : 1;
 
-  console.log(search);
 
   const listProntuario = new ListProntuarioService();
 
