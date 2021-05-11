@@ -11,11 +11,11 @@ class Registro {
   texto: string;
 
   @Column()
-  paciente_id: string;
+  prontuario_id: string;
 
   @ManyToOne(() => Prontuario)
   @JoinColumn({name: 'prontuario_id'})
-  paciente: Prontuario;
+  prontuario: Prontuario;
 
   @Column('boolean', {default: true})
   status: boolean;
@@ -26,3 +26,5 @@ class Registro {
   @UpdateDateColumn()
   updated_at: Date;
 }
+
+export default Registro

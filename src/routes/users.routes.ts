@@ -1,6 +1,9 @@
-import { Router } from 'express';
-import CreateUserService from '../services/CreateUserService';
-import ListUserService from '../services/ListUserService';
+import { response, Router } from 'express';
+import CreateUserService from '../services/User/CreateUserService';
+import DeleteUserService from '../services/User/DeleteUserService';
+import GetUserService from '../services/User/GetUserService';
+import ListUserService from '../services/User/ListUserService';
+import UpdateUserService from '../services/User/UpdateUserService';
 
 const usersRouter = Router();
 
@@ -31,6 +34,39 @@ usersRouter.get('/', async (request, response) => {
   console.log(users);
 
   return response.json(users);
+})
+
+usersRouter.get('/:id', async (request, response) => {
+  const { id } = request.params;
+
+  const getUser = new GetUserService();
+
+  const user = await getUser.execute(id);
+
+  return response.json(user);
+})
+
+usersRouter.put('/:id', async (request, response) => {
+  const { id } = request.params;
+  const { name, login, password, cargo_id } = request.body;
+
+  const updateUser = new UpdateUserService();
+
+  const user = await updateUser.execute({
+    id, name, login, password, cargo_id 
+  })
+
+  return response.json(user);
+})
+
+usersRouter.delete('/:id', async (request, response) => {
+  const { id } = request.params;
+
+  const deleteUser = new DeleteUserService();
+
+  const result = await deleteUser.execute(id);
+
+  return response.json(result);
 })
 
 export default usersRouter;
