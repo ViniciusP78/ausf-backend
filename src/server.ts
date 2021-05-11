@@ -51,9 +51,11 @@ server.listen(process.env.PORT || 3333, () => {
 io.on("connection", (socket) => {
   socket.on("init", (userId) => {
     sockets[userId] = socket.id;
+    console.log('conexão nova do usuário', userId);
   });
 
   socket.on("enviarProntuario", ({ medico, prontuario }) => {
-    io.to(sockets[medico]).emit(prontuario);
+    console.log('recebido', sockets, medico)
+    io.to(sockets[medico]).emit("receberProntuario", prontuario);
   });
 });
