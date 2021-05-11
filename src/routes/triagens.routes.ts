@@ -15,7 +15,7 @@ triagensRouter.post('/', async (request, response) => {
   return response.json(triagem);
 })
 
-triagensRouter.get('/', async (request, response) => {
+triagensRouter.get('/list/:prontuario_id', async (request, response) => {
   const { prontuario_id } = request.params;
 
   const listTriagem = new ListTriagemService();
