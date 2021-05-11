@@ -1,5 +1,6 @@
-import { Router } from 'express';
+import { response, Router } from 'express';
 import CreateUserService from '../services/User/CreateUserService';
+import DeleteUserService from '../services/User/DeleteUserService';
 import GetUserService from '../services/User/GetUserService';
 import ListUserService from '../services/User/ListUserService';
 
@@ -42,6 +43,16 @@ usersRouter.get('/:id', async (request, response) => {
   const user = await getUser.execute(id);
 
   return response.json(user);
+})
+
+usersRouter.delete('/:id', async (request, response) => {
+  const { id } = request.params;
+
+  const deleteUser = new DeleteUserService();
+
+  const result = await deleteUser.execute(id);
+
+  return response.json(result);
 })
 
 export default usersRouter;
