@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import CreateUserService from '../services/User/CreateUserService';
+import GetUserService from '../services/User/GetUserService';
 import ListUserService from '../services/User/ListUserService';
 
 const usersRouter = Router();
@@ -31,6 +32,16 @@ usersRouter.get('/', async (request, response) => {
   console.log(users);
 
   return response.json(users);
+})
+
+usersRouter.get('/:id', async (request, response) => {
+  const { id } = request.params;
+
+  const getUser = new GetUserService();
+
+  const user = await getUser.execute(id);
+
+  return response.json(user);
 })
 
 export default usersRouter;
