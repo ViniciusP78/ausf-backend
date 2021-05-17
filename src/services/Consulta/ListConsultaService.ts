@@ -16,6 +16,7 @@ class ListConsultaService {
       .andWhere(new Brackets(qb => {
         qb.where("paciente.nome iLIKE :search",{search: search ? `%${search}%` : '%%'})
         .orWhere("paciente.cartao_sus iLIKE :search",{search: search ? `%${search}%` : '%%'})
+        .orWhere("paciente.CPF iLIKE :search",{search: search ? `%${search}%` : '%%'})
       }))
       .getMany();
 

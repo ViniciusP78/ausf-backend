@@ -1,5 +1,9 @@
 import "reflect-metadata";
 
+require('dotenv').config({
+  path: '.env',
+});
+
 import express, { Request, Response, NextFunction } from "express";
 import cors from "cors";
 import http from "http";

@@ -7,6 +7,7 @@ import prontuariosRouter from './prontuarios.routes';
 import consultasRouter from './consultas.routes';
 import registrosRouter from './registros.routes';
 import triagensRouter from './triagens.routes';
+import uploadsRouter from './uploads.routes';
 
 const routes = Router();
 
@@ -17,5 +18,6 @@ routes.use('/prontuarios', prontuariosRouter);
 routes.use('/consultas', consultasRouter);
 routes.use('/registros', registrosRouter);
 routes.use('/triagens', triagensRouter);
+routes.use('/uploads', uploadsRouter);
 
 export default routes;
