@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import CountProntuarioService from '../services/Prontuario/CountProntuarioService';
 import CreateProntuarioService from '../services/Prontuario/CreateProntuarioService';
 import DeleteProntuarioService from '../services/Prontuario/DeleteProntuarioService';
 import GetProntuarioService from '../services/Prontuario/GetProntuarioService';
@@ -27,6 +28,15 @@ prontuariosRouter.get('/', async (request, response) => {
   const prontuarios = await listProntuario.execute(search, pag);
 
   return response.json(prontuarios)
+})
+
+prontuariosRouter.get('/count', async (request, response) => {
+  const countProntuario = new CountProntuarioService();
+
+  const count = await countProntuario.execute();
+
+  return response.json(count);
+
 })
 
 prontuariosRouter.get('/:id', async (request, response) => {
@@ -61,5 +71,7 @@ prontuariosRouter.delete('/:id', async (request, response) => {
 
   return response.json(result);
 })
+
+
 
 export default prontuariosRouter;
