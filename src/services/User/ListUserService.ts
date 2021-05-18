@@ -9,7 +9,7 @@ class ListUserService {
     let users = await usersRepository.createQueryBuilder("user")
       .innerJoinAndSelect("user.cargo", "cargo")
       .where(cargo ? "cargo_id = :cargo": "1=1", {cargo})
-      .andWhere("name iLIKE :search",{search: search ? `%${search}%` : '%%'})
+      .andWhere(search ? "name % :search" : "1=1",{search})
       .getMany();
 
     users.forEach((user) => {
