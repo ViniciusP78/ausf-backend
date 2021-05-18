@@ -14,7 +14,7 @@ class ListConsultaService {
       .innerJoinAndSelect("prontuario.paciente", "paciente")
       .where(data ? "data_agendada::date = :data" : "1=1",{data})
       .andWhere(new Brackets(qb => {
-        qb.where("paciente.nome iLIKE :search",{search: search ? `%${search}%` : '%%'})
+        qb.where(search ? "paciente.nome % :search" : "1=1", {search})
         .orWhere("paciente.cartao_sus iLIKE :search",{search: search ? `%${search}%` : '%%'})
         .orWhere("paciente.CPF iLIKE :search",{search: search ? `%${search}%` : '%%'})
       }))
