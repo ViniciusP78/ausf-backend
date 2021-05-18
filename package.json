@@ -7,7 +7,7 @@
     "start": "node ./dist/src/server.js",
     "start:dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules src/server.ts",
     "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js",
-    "postinstall": "tsc",
+    "postinstall": "tsc"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
