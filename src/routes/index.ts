@@ -8,6 +8,7 @@ import consultasRouter from './consultas.routes';
 import registrosRouter from './registros.routes';
 import triagensRouter from './triagens.routes';
 import uploadsRouter from './uploads.routes';
+import examesRouter from './exames.routes';
 
 const routes = Router();
 
@@ -19,5 +20,6 @@ routes.use('/consultas', consultasRouter);
 routes.use('/registros', registrosRouter);
 routes.use('/triagens', triagensRouter);
 routes.use('/uploads', uploadsRouter);
+routes.use('/exames', examesRouter);
 
 export default routes;
