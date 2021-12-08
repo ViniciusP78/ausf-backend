@@ -7,7 +7,7 @@ import multerS3 from 'multer-s3';
 const uploadsRouter = Router();
 
 aws.config.update({
-  accessKeyId: process.env.S3_SECRET_ACCESS_KEY,
+  accessKeyId: process.env.S3_ACCESS_KEY_ID,
   secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
 });
 

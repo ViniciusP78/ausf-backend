@@ -8,7 +8,7 @@ class ListProntuarioService {
 
     const prontuarios = await prontuariosRepository.createQueryBuilder("prontuario")
       .innerJoinAndSelect("prontuario.paciente", "paciente")
-      .where(search ? "paciente.nome % :search" : "1=1",{search})
+      .where(search ? "paciente.nome iLIKE :search" : "1=1",{search})
       .orWhere("paciente.cartao_sus iLIKE :search",{search: search ? `%${search}%` : '%%'})
       .orWhere("paciente.RG iLIKE :search",{search: search ? `%${search}%` : '%%'})
       .orWhere("paciente.CPF iLIKE :search",{search: search ? `%${search}%` : '%%'})
